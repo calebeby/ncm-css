@@ -15,22 +15,22 @@ In addition to `css`, this module supports:
 ## Installation
 
 ### Vim-Plug
-```
+```vim
 Plug 'calebeby/ncm-css'
 ```
 
 ### Dein
-```
+```vim
 call dein#add('calebeby/ncm-css')
 ```
 
 ### Vundle
-```
+```vim
 Plugin 'calebeby/ncm-css'
 ```
 
 ### NeoBundle
-```
+```vim
 NeoBundle 'calebeby/ncm-css'
 ```
 
