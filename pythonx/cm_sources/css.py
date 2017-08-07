@@ -20,7 +20,7 @@ with open(syntaxes_path) as data_file:
 register_source(
     name='css',
     abbreviation='css',
-    scopes=['css', 'sugarss', 'sass', 'scss', 'stylus'],
+    scopes=['css', 'sugarss', 'sass', 'scss', 'stylus', 'less'],
     word_pattern=r'[\w-]+',
     cm_refresh_patterns=[' ', '\(', '\)', ':'],
     priority=8)
