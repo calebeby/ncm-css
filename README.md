@@ -1,5 +1,7 @@
 # ncm-css
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/calebeby/ncm-css.svg)](https://greenkeeper.io/)
+
 CSS completion for [roxma/nvim-completion-manager](https://github.com/roxma/nvim-completion-manager)
 
 It uses the latest data from [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) via https://github.com/mdn/data/tree/master/css.
