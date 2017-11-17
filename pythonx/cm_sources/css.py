@@ -21,13 +21,13 @@ with open(properties_path) as data_file:
 with open(syntaxes_path) as data_file:
     cssSyntaxes = json.load(data_file)
 
-register_source(
-    name='css',
-    abbreviation='css',
-    scopes=['css', 'sugarss', 'sass', 'scss', 'stylus', 'less'],
-    word_pattern=r'[\w\-]+\s*:\s+',
-    cm_refresh_patterns=[' ', '\(', '\)', ':'],
-    priority=8)
+register_source(name='css',
+                abbreviation='css',
+                scoping=True,
+                scopes=['css', 'sugarss', 'sass', 'scss', 'stylus', 'less'],
+                word_pattern=r'[\w\-]+\s*:\s+',
+                cm_refresh_patterns=[r'[\w\-]+\s*:\s+'],
+                priority=8)
 
 
 def parse(definition, visited=[]):
