@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""Completion source for nvim-completion-manager."""
 import json
 import os
 import re
@@ -17,16 +21,17 @@ with open(properties_path) as data_file:
 with open(syntaxes_path) as data_file:
     cssSyntaxes = json.load(data_file)
 
-register_source(
-    name='css',
-    abbreviation='css',
-    scopes=['css', 'sugarss', 'sass', 'scss', 'stylus', 'less'],
-    word_pattern=r'[\w-]+',
-    cm_refresh_patterns=[' ', '\(', '\)', ':'],
-    priority=8)
+register_source(name='css',
+                abbreviation='css',
+                scoping=True,
+                scopes=['css', 'sugarss', 'sass', 'scss', 'stylus', 'less'],
+                word_pattern=r'[\w\-]+\s*:\s+',
+                cm_refresh_patterns=[r'[\w\-]+\s*:\s+'],
+                priority=8)
 
 
 def parse(definition, visited=[]):
+    """Return list of css keywords from the syntax."""
     values = []
     chunks = ['']
     letters = re.compile('[a-zA-Z-<>()]')
@@ -46,7 +51,8 @@ def parse(definition, visited=[]):
     return values
 
 
-def getPossibleValues(prop, rest):
+def get_candidates(prop, rest):
+    """Given a css property, return list of valid completion values."""
     values = []
     value_definition = cssProperties[prop]
     values = parse(value_definition)
@@ -54,12 +60,15 @@ def getPossibleValues(prop, rest):
 
 
 class Source(Base):
+    """Main fn called by nvim-completion-manager."""
+
     def cm_refresh(self, info, ctx):
+        """Refresh candidates given vim cursor and line context."""
         matches = []
-        if ":" in ctx["typed"]:
-            self.logger.info(ctx["typed"])
-            prop, val = ctx["typed"].split(':', 1)
-            matches += getPossibleValues(prop.strip(), val)
+        if ':' in ctx['typed']:
+            self.logger.info(ctx['typed'])
+            prop, val = ctx['typed'].split(':', 1)
+            matches += get_candidates(prop.strip(), val)
         else:
             matches += map(lambda i: i + ':', list(cssProperties.keys()))
         self.complete('css', ctx, ctx['startcol'], matches)
